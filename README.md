@@ -31,3 +31,12 @@ Expected Deliverables:
 • Code broken down into partial views (e.g., header, footer) for ease of maintenance.
 • Well-documented code with proper commenting and clear structure.
 ![chrome zab_connect](https://github.com/user-attachments/assets/bc09150b-6c71-47fd-a060-4150c552b2e2)
+![edge zab_connect](https://github.com/user-attachments/assets/27ff318d-84d0-4629-96aa-991787a3869d)
+![firefox zab_connect](https://github.com/user-attachments/assets/28a483e7-324a-4abd-8952-1f3b26dd7624)
+![laptop zab_connect](https://github.com/user-attachments/assets/62dbda86-565f-4343-9edf-d3ab0fe309b3)
+![phone zab_connect](https://github.com/user-attachments/assets/52ff1606-8374-4047-823f-e83151b4b3d6)
+![tablet zab_connect](https://github.com/user-attachments/assets/eee052b0-a4ff-4a7f-a899-3551e92dd810)
+
+
+
+
