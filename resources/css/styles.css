@@ -1,0 +1,357 @@
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    color: #333;
+    background-color: #E6E6FA;
+}
+
+/* Header Styling */
+.site-header {
+    background-color: #333; /* Same background color as the footer */
+    color: #f8f9fa; /* Text color for header */
+}
+
+.site-header .navbar {
+    background-color:#333 ; /* Keep navbar background transparent to show header color */
+}
+
+.site-header .navbar-brand {
+    color: #fbf5f5 !important; /* Ensure the brand text is white */
+}
+
+.site-header .nav-link {
+    color: #ffffff !important; /* White text for navigation links */
+}
+
+.site-header .navbar-toggler {
+    background-color: #f8f9fa; /* Background color for the toggle button */
+}
+
+.site-header .nav-link:hover {
+    color: #00060b !important; /* Highlight on hover */
+    background-color: #4A90E2; /* Lighten background on hover */
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #333; /* Set the background color same as footer */
+}
+
+.navbar-brand {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fbf5f5 !important; /* White text */
+    font-weight: 700;
+    font-size: 1.7em;
+    transition: color 0.3s ease;
+    background-color: #333; /* Background color same as footer */
+    padding: 10px 15px; /* Add padding for better click area */
+    border-radius: 4px; 
+}
+
+.nav-link {
+    color: #ffffff !important; /* White text for visibility */
+    font-weight: 550;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+    background-color: #333; /* Background color same as footer */
+    padding: 10px 15px; /* Add padding for better click area */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.nav-link:hover {
+    color: #00060b !important; /* Highlight on hover */
+    background-color: #4A90E2; /* Lighten background on hover */
+}
+
+.btn-admin {
+    color: #fff !important;
+    background-color: #4A90E2;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 3px;
+}
+
+/* Jumbotron */
+.jumbotron {
+    padding: 5% 10%;
+    background: linear-gradient(135deg, #4A90E2 30%, #3A3D5C);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    min-height: 50vh; /* Minimum height of 75% of the viewport height */
+    width: 100%; /* Full width */
+   
+    
+}
+
+.jumbotron h1 {
+    font-weight: 700;
+    font-size: 3em;
+    color: #fff;
+}
+
+.lead {
+    color: #c2d4e2;
+    font-size: 1.2em;
+}
+
+.jumbotron a {
+    color: #fff;
+    background-color: #17a2b8;
+    border-radius: 4px;
+    padding: 10px 25px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.jumbotron a:hover {
+    background-color: #138496;
+}
+
+/* Event Section */
+.event-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 10%;
+    background-image: url('src/img/event-background.jpg'); /* Background image for event section */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.event-cards .card {
+    width: 100%;
+    max-width: 18rem;
+    margin: 20px 10px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-cards .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    font-weight: 700;
+    color: #333;
+}
+
+.card-text {
+    color: #666;
+    font-weight: 600;
+}
+
+/* Venue Section */
+.venue {
+    margin: 50px auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Light background with transparency */
+    padding: 30px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.venue-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.venue-img,
+.venue-location {
+    max-width: 450px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.venue h3 {
+    margin: 20px 0;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Contact Form */
+.container form {
+    background: linear-gradient(135deg, #6c757d, #495057); /* Dark gradient background for contact form */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.container form .form-group label {
+    font-weight: 600;
+    color: #f8f9fa; /* Lighter text for labels */
+}
+
+.container form .form-control {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.container form button {
+    background-color: #4A90E2;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.container form button:hover {
+    background-color: #357ABD;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    background-color: #333; /* Dark background for footer */
+    color: #f8f9fa;
+}
+
+footer p {
+    font-size: 0.9em;
+    color: #b0b9c3;
+    margin: 10px 0;
+}
+
+footer i {
+    font-size: 1.2em;
+    color: #17a2b8;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+footer i:hover {
+    color: #138496;
+}
+
+/* Admin Login */
+.admin-login {
+    background-color: #f8f9fa;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.admin-login h2 {
+    font-weight: 900;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.admin-login input[type="email"],
+.admin-login input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.admin-login button {
+    background-color: #4A90E2;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    width: 100%;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.admin-login button:hover {
+    background-color: #357ABD;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .speaker-cards,
+    .event-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta h1 {
+        font-size: 2em;
+    }
+
+    .venue-section {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Margin Top for Container */
+.mt-4 {
+    margin-top: 1.5rem; /* Adjust based on your needs */
+}
+
+/* Center Text for Heading */
+.text-center {
+    text-align: center; /* Center the text */
+    font-weight: 750; /* Bold font weight */
+    color: #333; /* Color for visibility */
+    margin: 20px 0; /* Margin for spacing */
+}
+
+/* Row Styling */
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of items */
+    
+    
+}
+/* Admin Dashboard */
+.dashboard {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#eventForm input, #eventForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+.event-item {
+    background-color: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.event-item button {
+    margin-left: 10px;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+}
+
