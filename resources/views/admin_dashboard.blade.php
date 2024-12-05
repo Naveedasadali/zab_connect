@@ -26,47 +26,52 @@
 
 
         <hr>
-
-        <!-- Event List (Display Existing Events) -->
-        <h2>Event List</h2>
-        <div id="eventList">
-            <!-- Example Event Item -->
-            <div class="event-item" id="event-1">
-                <h5>Sample Event</h5>
-                <p>Description of the event goes here.</p>
-                <img src="event-image.jpg" alt="Event Image">
-                <button class="btn btn-warning" onclick="editEvent(1)">Edit</button>
-                <button class="btn btn-danger" onclick="deleteEvent(1)">Delete</button>
-            </div>
+<!-- Event List Section -->
+<h2>Event List</h2>
+<div id="eventList" class="mt-4">
+    <form id="manageEventForm" class="form-inline">
+        <div class="form-group">
+            <label for="event_id" class="mr-2">Select Event</label>
+            <select name="event_id" id="event_id" class="form-control mr-3" required>
+                <!-- Events dynamically fetched from the database -->
+                @foreach($events as $event)
+                    <option value="{{ $event->id }}">{{ $event->name }}</option>
+                @endforeach
+            </select>
         </div>
-    </div>
+        <button type="button" class="btn btn-warning mr-2" onclick="editSelectedEvent()">Edit</button>
+        <button type="button" class="btn btn-danger" onclick="deleteSelectedEvent()">Delete</button>
+    </form>
 </div>
+
 
 <!-- JavaScript for event management -->
 <script>
 // Function to handle event editing
-function editEvent(eventId) {
-    const eventTitle = prompt("Enter new event title:");
-    const eventDescription = prompt("Enter new event description:");
-    const eventImage = prompt("Enter new event image URL:");
+// Edit the selected event
+function editSelectedEvent() {
+    const eventId = document.getElementById('event_id').value;
+    const eventName = document.getElementById('event_id').selectedOptions[0].text;
 
-    if (eventTitle && eventDescription && eventImage) {
-        fetch("/update-event", {
-            method: "POST",
+    const newName = prompt(`Edit the name for event: ${eventName}`);
+    const newDescription = prompt(`Edit the description for event: ${eventName}`);
+
+    if (newName && newDescription) {
+        fetch(`/events/${eventId}`, {
+            method: "PUT",
             body: JSON.stringify({
-                id: eventId,
-                title: eventTitle,
-                description: eventDescription,
-                image: eventImage
+                name: newName,
+                description: newDescription
             }),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": '{{ csrf_token() }}'
             }
         })
         .then(response => response.json())
         .then(data => {
             alert("Event updated successfully!");
-            window.location.href = "events.html";
+            window.location.reload(); // Reload to update the event list
         })
         .catch(error => {
             console.error("Error updating event:", error);
@@ -76,30 +81,32 @@ function editEvent(eventId) {
     }
 }
 
-// Function to handle event deletion
-function deleteEvent(eventId) {
-    const confirmDelete = confirm("Are you sure you want to delete this event?");
-    
+// Delete the selected event
+function deleteSelectedEvent() {
+    const eventId = document.getElementById('event_id').value;
+    const eventName = document.getElementById('event_id').selectedOptions[0].text;
+
+    const confirmDelete = confirm(`Are you sure you want to delete the event: ${eventName}?`);
+
     if (confirmDelete) {
-        fetch("/delete-event", {
+        fetch(`/events/${eventId}`, {
             method: "DELETE",
-            body: JSON.stringify({ id: eventId }),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": '{{ csrf_token() }}'
             }
         })
         .then(response => response.json())
         .then(data => {
             alert("Event deleted successfully!");
-            const eventElement = document.getElementById(`event-${eventId}`);
-            eventElement.remove();
-            window.location.href = "events.html";
+            window.location.reload(); // Reload to update the event list
         })
         .catch(error => {
             console.error("Error deleting event:", error);
         });
     }
 }
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

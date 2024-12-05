@@ -5,7 +5,13 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 
 class EventController extends Controller
+
 {
+    public function index()
+    {
+        $events = Event::all();
+        return view('events', compact('events'));
+    }
     // Store method for creating events
     public function store(Request $request)
     {
@@ -30,4 +36,5 @@ class EventController extends Controller
 
         return redirect()->route('events')->with('success', 'Event created successfully!');
     }
+
 }

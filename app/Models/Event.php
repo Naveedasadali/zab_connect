@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,4 +12,12 @@ class Event extends Model
 
     // Allow mass assignment for these fields
     protected $fillable = ['name', 'description', 'image'];
+
+    /**
+     * Define a one-to-many relationship with Participant.
+     */
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
 }

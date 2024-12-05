@@ -1,47 +1,99 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('content')
+<!-- Admin Login Page Content -->
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Admin Login</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="{{ route('login') }}" onsubmit="return validateForm()">
+                @csrf
+                
+                <!-- Email Address -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-control" 
+                        value="{{ old('email') }}" 
+                        required 
+                        autofocus>
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <!-- Password -->
+                <div class="form-group mt-3">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-control" 
+                        required>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Remember Me -->
+                <div class="form-check mt-3">
+                    <input 
+                        type="checkbox" 
+                        id="remember_me" 
+                        name="remember" 
+                        class="form-check-input">
+                    <label for="remember_me" class="form-check-label">Remember Me</label>
+                </div>
+
+                <!-- Forgot Password Link -->
+                @if (Route::has('password.request'))
+                    <div class="mt-3">
+                        <a 
+                            href="{{ route('password.request') }}" 
+                            class="text-sm text-dark">
+                            Forgot your password?
+                        </a>
+                    </div>
+                @endif
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-dark btn-block mt-4">Login</button>
+            </form>
+
+            <!-- Error Message -->
+            <p id="error-message" class="text-danger text-center mt-3"></p>
         </div>
+    </div>
+</div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+<!-- JavaScript Validation -->
+<script>
+    function validateForm() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            errorMessage.textContent = "Please enter a valid email address.";
+            return false;
+        }
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        if (password.length < 6) {
+            errorMessage.textContent = "Password must be at least 6 characters long.";
+            return false;
+        }
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+        // If validation passes
+        errorMessage.textContent = "";
+        return true;
+    }
+</script>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+@endsection

@@ -16,7 +16,8 @@
     <div class="jumbotron text-center">
         <h1 class="display-5">Welcome to SZABIST Connect</h1>
         <p class="lead">Find all the latest SZABIST events here!</p>
-        <a class="btn btn-dark btn-lg" href="events.html" role="button">View Events</a>
+        <a href="{{ route('events') }}" class="btn btn-dark btn-lg" role="button">View Events</a>
+
     </div>
 
     <!-- Latest Event Details Section -->
@@ -77,7 +78,8 @@
     <div class="cta text-center">
         <h1>Get Your Ticket Today!</h1>
         <p>Szabist 100 Campus</p>
-        <a class="btn btn-dark btn-lg" href="#" role="button">BUY TICKET PKR 1000</a>
+        <a class="btn btn-dark btn-lg" href="{{ route('participant.create') }}" role="button">Buy Tickets</a>
+
     </div>
     <hr>
     <div class="venue row">
