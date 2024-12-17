@@ -8,9 +8,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ParticipantController;
 
-Route::get('/', function () {
-    return view('zabconnect');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/view/events', [EventController::class, 'index'])->name('events');
 
@@ -25,6 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 });
+
+
+
+// In routes/web.php
+Route::get('/search/events', [EventController::class, 'searchEvents'])->name('search.events');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

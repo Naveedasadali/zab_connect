@@ -36,5 +36,25 @@ class EventController extends Controller
 
         return redirect()->route('events')->with('success', 'Event created successfully!');
     }
+    public function searchEvents(Request $request)
+    {
+        // Get the search query from the request
+        $query = $request->get('query');
+        
+        // Validate the input (optional)
+        $validated = $request->validate([
+            'query' => 'required|string|max:255',
+        ]);
+        
+        // Perform the search (basic search by title, you can adjust for more fields)
+        $events = Event::where('title', 'LIKE', '%' . $query . '%')
+                       ->orWhere('description', 'LIKE', '%' . $query . '%') // You can also search by description or other fields
+                       ->get();
+                       dd($events);
+        // Return a JSON response with the events
+        return response()->json([
+            'events' => $events
+        ]);
+    }
 
 }
