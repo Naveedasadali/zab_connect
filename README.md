@@ -1,42 +1,108 @@
- Szabist Event Landing Website Proposal
-Submitted by: Naveed Asad Ali
-Program: BSCS 5D
-
-Objective:
-The objective of this project is to develop a simple yet fully functional 3-page website that is
-responsive across all devices and browsers. The project will evolve from a static front-end
-into a dynamic website built using Laravel. The project will include the use of partial views
-to ensure clean and manageable code. In the final phase, dynamic sections and API
-endpoints will be introduced, making the website interactive and scalable.
-
-Project Breakdown:
-The website will initially focus on the front-end development using HTML, CSS, and
-Bootstrap to ensure a responsive and visually appealing design. Following this, the static
-front-end will be integrated into Laravel using Blade templates, routes, and controllers. This
-process will involve breaking the website into partial views for reusable components such
-as headers and footers.
-
-Requirements:
-The following requirements must be met for this project:
-• At least 3 pages (e.g., Home, Event Details, Contact).
-• Clean and simple website layout with proper alignment of elements.
-• Full responsiveness on all screen sizes (desktop, tablet, and mobile).
-• Cross-browser compatibility (Chrome, Firefox, Safari, and Edge).
-• The front-end must be integrated with Laravel using Blade templates.
-• Divide the website into partials to ensure code reusability and maintainability.
-
-Expected Deliverables:
-• A static front-end that is fully responsive and designed using good design principles.
-• Laravel integration with routes, controllers, and Blade templates.
-• Code broken down into partial views (e.g., header, footer) for ease of maintenance.
-• Well-documented code with proper commenting and clear structure.
-![chrome zab_connect](https://github.com/user-attachments/assets/bc09150b-6c71-47fd-a060-4150c552b2e2)
-![edge zab_connect](https://github.com/user-attachments/assets/27ff318d-84d0-4629-96aa-991787a3869d)
-![firefox zab_connect](https://github.com/user-attachments/assets/28a483e7-324a-4abd-8952-1f3b26dd7624)
-![laptop zab_connect](https://github.com/user-attachments/assets/62dbda86-565f-4343-9edf-d3ab0fe309b3)
-![phone zab_connect](https://github.com/user-attachments/assets/52ff1606-8374-4047-823f-e83151b4b3d6)
-![tablet zab_connect](https://github.com/user-attachments/assets/eee052b0-a4ff-4a7f-a899-3551e92dd810)
 
 
+# Szabist Event Landing Website
+
+**Submitted by:** Naveed Asad Ali  
+**Program:** BSCS 5D
+
+## Project Overview
+
+The "Szabist Event Landing Website" is a responsive, dynamic website developed using Laravel. Initially, the website was built as a static front-end using HTML, CSS, and Bootstrap to ensure responsiveness across all devices and browsers. The front-end was later integrated into Laravel with Blade templates, routes, and controllers. The final version includes dynamic sections and API endpoints, making the website interactive and scalable.
+
+This project implements a clean and simple website layout with proper alignment of elements, ensuring full responsiveness on all screen sizes (desktop, tablet, and mobile). Cross-browser compatibility is also ensured (Chrome, Firefox, Safari, and Edge).
+
+## Project Features
+
+- **CRUD Implementation**: Complete Create, Read, Update, and Delete functionality for event management.
+- **Relationship Implementation**: At least one relationship between models has been implemented (e.g., Event-Participant relationship).
+- **AJAX Integration**: AJAX is used for search-bar and dynamic functionality to improve user experience.
+- **API Implementation**: APIs are included to expose the event data, allowing interaction with other systems or services.
+
+## Repository Requirements
+
+- The repository contains the complete project with all necessary modules.
+- The project includes at least **2 branches** (`api` and `final-project`).
+- Proper **database migrations** for all modules in the project.
+- Code follows clean, well-commented, and maintainable practices.
+
+## Setup Instructions
+
+### Prerequisites
+Before you begin, ensure you have the following installed:
+- PHP (preferably 8.0 or higher)
+- Composer
+- Laravel (via Composer)
+- Node.js and npm (for frontend dependencies)
+
+### Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/szabist-event-landing.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd szabist-event-landing
+    ```
+
+3. Install PHP dependencies:
+    ```bash
+    composer install
+    ```
+
+4. Install frontend dependencies (if applicable):
+    ```bash
+    npm install
+    ```
+
+5. Set up the environment variables:
+    - Copy `.env.example` to `.env`:
+    ```bash
+    cp .env.example .env
+    ```
+
+6. Generate the application key:
+    ```bash
+    php artisan key:generate
+    ```
+
+7. Run database migrations:
+    ```bash
+    php artisan migrate
+    ```
+
+8. (Optional) Seed the database if needed:
+    ```bash
+    php artisan db:seed
+    ```
+
+9. Serve the application:
+    ```bash
+    php artisan serve
+    ```
+
+The application should now be accessible at `http://localhost:8000`.
+
+## Usage Guide
+
+- **Home Page**: Displays a summary of events.
+- **Event Details**: View detailed information about each event.
+- **Contact Page**: Provides a contact form and other contact details.
+- **CRUD Operations**: Admins can create, update, and delete events through the dashboard.
+- **Search**: Use the AJAX-powered search bar to filter events by name or description.
+
+## Database Migrations
+
+The project includes migrations for the following models:
+
+- `Event` - For event-related information.
+- `Participant` - For storing participant data.
+- Relationships between the `Event` and `Participant` models are defined.
+
+Run the migrations with:
+
+
+php artisan migrate
 
 
