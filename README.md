@@ -100,9 +100,19 @@ The project includes migrations for the following models:
 - `Participant` - For storing participant data.
 - Relationships between the `Event` and `Participant` models are defined.
 
-Run the migrations with:
+![image](https://github.com/user-attachments/assets/889e28f0-3f76-45fc-bae9-23eaeeaf717c)
+
+![events](https://github.com/user-attachments/assets/d0f15758-cd17-4b68-a125-731a38641b95)
+
+![contact](https://github.com/user-attachments/assets/945dfed2-8d50-4ec3-a5a1-7fe427321fe8)
+
+![buy tickets](https://github.com/user-attachments/assets/a6b6171e-1021-48d3-ba19-eb7bd9863753)
+
+![admin dashbaord](https://github.com/user-attachments/assets/b96f0727-c90d-4bd3-ac0a-bf805e1dfe4c)
+![login](https://github.com/user-attachments/assets/c1695966-cb69-489b-aa85-94f9c758cc05)
+![events](https://github.com/user-attachments/assets/4e023ce4-a2a5-43ba-a647-83aef08f263f)
 
 
-php artisan migrate
+
 
 
