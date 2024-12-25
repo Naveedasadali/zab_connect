@@ -8,6 +8,21 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <style>
+        .event-table img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+        .star-btn {
+            color: #f39c12;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -21,108 +36,101 @@
             </form>
         </div>
 
-        <!-- Event Creation Form -->
-        <h2>Create Event</h2>
-        <form id="eventForm" method="POST" action="{{ route('create-event') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="eventName">Event Name</label>
-                <input type="text" class="form-control" id="eventName" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="eventDescription">Description</label>
-                <textarea class="form-control" id="eventDescription" name="description" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="eventImage">Upload Image</label>
-                <input type="file" class="form-control" id="eventImage" name="event_image" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn btn-dark btn-block">Create Event</button>
-        </form>
-
-        <hr>
-
-       <!-- Event List Section -->
-<h2>Event List</h2>
-<div id="eventList" class="mt-4">
-    <form id="manageEventForm" class="form-inline">
-        <div class="form-group">
-            <label for="event_id" class="mr-2">Select Event</label>
-            <select name="event_id" id="event_id" class="form-control mr-3" required>
-                <!-- Events dynamically fetched from the database -->
-                @foreach($events as $event)
-                    <option value="{{ $event->id }}">{{ $event->name }}</option>
-                @endforeach
-            </select>
+        <!-- Create Event Button -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Event List</h2>
+            <a href="{{ route('events.create') }}" class="btn btn-dark">Create Event</a>
         </div>
-        <button type="button" class="btn btn-warning mr-2" onclick="editSelectedEvent()">Edit</button>
-        <button type="button" class="btn btn-danger" onclick="deleteSelectedEvent()">Delete</button>
-    </form>
-</div>
 
+        <!-- Event List Table -->
+        <table class="table table-bordered event-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($events as $event)
+                <tr>
+                    <td>
+                        @if($event->image)
+                        <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->name }}">
+                        @else
+                        <span>No Image</span>
+                        @endif
+                    </td>
+                    <td>{{ $event->name }}</td>
+                    <td>{{ $event->description }}</td>
+                    <td>
+                        <div class="action-btns">
+                            <!-- Update Route -->
+                            <a href="{{ route('events.updateForm', ['id' => $event->id]) }}" class="btn btn-warning btn-sm">Update</a>
+                            <!-- Delete Route -->
+                            <form action="{{ route('events.destroy', ['id' => $event->id]) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                            <!-- Prioritize Button -->
+                            <span class="star-btn" onclick="prioritizeEvent({{ $event->id }})">&#9733;</span>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-<!-- JavaScript for event management -->
-<script>
-// Function to handle event editing
-// Edit the selected event
-function editSelectedEvent() {
-    const eventId = document.getElementById('event_id').value;
-    const eventName = document.getElementById('event_id').selectedOptions[0].text;
+        <!-- Participant List Section -->
+        <h2 class="mt-5">Participants List</h2>
+        @foreach($events as $event)
+        <div class="mb-4">
+            <h5>Participants for: {{ $event->name }}</h5>
+            <table class="table table-bordered event-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($event->participants as $index => $participant)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $participant->name }}</td>
+                        <td>{{ $participant->email }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="3" class="text-center">No participants registered for this event</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        @endforeach
+    </div>
 
-    const newName = prompt(`Edit the name for event: ${eventName}`);
-    const newDescription = prompt(`Edit the description for event: ${eventName}`);
-
-    if (newName && newDescription) {
-        fetch(`/events/${eventId}`, {
-            method: "PUT",
-            body: JSON.stringify({
-                name: newName,
-                description: newDescription
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert("Event updated successfully!");
-            window.location.reload(); // Reload to update the event list
-        })
-        .catch(error => {
-            console.error("Error updating event:", error);
-        });
-    } else {
-        alert("Please fill in all fields!");
-    }
-}
-
-// Delete the selected event
-function deleteSelectedEvent() {
-    const eventId = document.getElementById('event_id').value;
-    const eventName = document.getElementById('event_id').selectedOptions[0].text;
-
-    const confirmDelete = confirm(`Are you sure you want to delete the event: ${eventName}?`);
-
-    if (confirmDelete) {
-        fetch(`/events/${eventId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert("Event deleted successfully!");
-            window.location.reload(); // Reload to update the event list
-        })
-        .catch(error => {
-            console.error("Error deleting event:", error);
-        });
-    }
-}
-
+    <!-- JavaScript for Event Management -->
+    <script>
+        function prioritizeEvent(eventId) {
+            fetch(`/events/${eventId}/prioritize`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Event prioritized successfully!");
+                window.location.reload();
+            })
+            .catch(error => console.error("Error prioritizing event:", error));
+        }
     </script>
 
     <!-- Include Bootstrap JS -->

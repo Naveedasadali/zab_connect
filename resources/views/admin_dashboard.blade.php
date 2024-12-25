@@ -7,7 +7,7 @@
     <div class="dashboard">
         <!-- Event Creation Form -->
         <h2>Create Event</h2>
-        <form id="eventForm" method="POST" action="{{ route('create-event') }}" enctype="multipart/form-data">
+        <form id="eventForm" method="POST" action="{{ route('create.event') }}" enctype="multipart/form-data">
             @csrf  <!-- Add CSRF token for security -->
     <div class="form-group">
         <label for="eventName">Event Name</label>

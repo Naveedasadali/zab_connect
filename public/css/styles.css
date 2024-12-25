@@ -64,14 +64,6 @@ body {
     background-color: #4A90E2; /* Lighten background on hover */
 }
 
-.btn-admin {
-    color: #fff !important;
-    background-color: #4A90E2;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 3px;
-}
-
 /* Jumbotron */
 .jumbotron {
     padding: 5% 10%;
@@ -81,8 +73,6 @@ body {
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
     min-height: 50vh; /* Minimum height of 75% of the viewport height */
     width: 100%; /* Full width */
-   
-    
 }
 
 .jumbotron h1 {
@@ -139,7 +129,8 @@ body {
 
 .card-title {
     font-weight: 700;
-    color: #333;
+    color: #333; /* Darken the title text */
+    font-size: 1.25rem; /* Adjust size for better visibility */
 }
 
 .card-text {
@@ -292,6 +283,7 @@ footer i:hover {
         align-items: center;
     }
 }
+
 /* Margin Top for Container */
 .mt-4 {
     margin-top: 1.5rem; /* Adjust based on your needs */
@@ -309,49 +301,4 @@ footer i:hover {
 .row {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping of items */
-    
-    
 }
-/* Admin Dashboard */
-.dashboard {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#eventForm input, #eventForm textarea {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-}
-
-.event-item {
-    background-color: #f9f9f9;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.event-item button {
-    margin-left: 10px;
-}
-
-img {
-    max-width: 100px;
-    height: auto;
-}
-

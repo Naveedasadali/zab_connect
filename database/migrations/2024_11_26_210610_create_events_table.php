@@ -16,7 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->charset('utf8mb4'); // Ensure utf8mb4 charset for emojis and special characters
             $table->string('image');
             $table->timestamps();
         });
@@ -32,4 +32,3 @@ class CreateEventsTable extends Migration
         Schema::dropIfExists('events');
     }
 }
-

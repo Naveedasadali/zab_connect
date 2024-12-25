@@ -6,7 +6,7 @@
         <div class="event-cards">
         @foreach($events as $event)  <!-- Loop through each event -->
                 <div class="card mb-4">
-                    <img src="{{ asset('storage/' . $event->image) }}" class="card-img-top" alt="Event Image">  <!-- Use the stored event image -->
+                <img src="{{ asset('storage/' . $event->image) }}" class="card-img-top" alt="{{ $event->title }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $event->name }}</h5>  <!-- Display the event name -->
                         <p class="card-text">

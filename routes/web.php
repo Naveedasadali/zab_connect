@@ -12,6 +12,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/view/events', [EventController::class, 'index'])->name('events');
 
+// In routes/web.php
+Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
+
 
 Route::get('/contact', function () {
     return view('contact');
@@ -27,7 +30,7 @@ Route::middleware('auth')->group(function () {
 
 
 // In routes/web.php
-Route::get('/search/events', [EventController::class, 'searchEvents'])->name('search.events');
+Route::get('/search-events', [EventController::class, 'searchEvents'])->name('search.events');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,7 +44,29 @@ Route::middleware('auth')->group(function () {
 
 
 
+// Show the form to create an event (GET method)
+Route::post('/events-create', [EventController::class, 'create'])->name('events.create');
+Route::get('/events-create', [EventController::class, 'create'])->name('events.create');
 
+// Store a new event (POST method)
+Route::post('/view/events', [EventController::class, 'store'])->name('events.store');
+
+// Show the form to update an event (GET method)
+Route::get('/events/{id}/update', [EventController::class, 'showUpdateForm'])->name('events.updateForm');
+
+// Update an event (POST method)
+Route::post('/events/{id}/update', [EventController::class, 'update'])->name('events.update');
+
+// Delete an event (POST method, as you typically use POST to submit delete requests in forms)
+
+// Update an event (POST method)
+Route::post('/events/{id}/update', [EventController::class, 'update'])->name('events.update');
+// In routes/web.php
+Route::post('/events/{id}/prioritize', [EventController::class, 'prioritize'])->name('events.prioritize');
+
+Route::post('/events/{id}/delete', [EventController::class, 'destroy'])->name('events.destroy');
+Route::get('/events/{id}/delete', [EventController::class, 'destroy'])->name('events.destroy');
+Route::delete('/events/{id}/delete', [EventController::class, 'destroy'])->name('events.destroy');
 
 // Route for displaying the admin login form (GET method)
 Route::get('/admin_login', function () {
@@ -51,39 +76,7 @@ Route::get('/admin_login', function () {
 // web.php (routes)
 Route::match(['get', 'post'], '/admin_dashboard', [AdminController::class, 'adminDashboard'])->name('admin_dashboard');
 
-Route::post('/create-event', function (Request $request) {
-    // Validate request data
-    $validated = $request->validate([
-        'eventName' => 'required|string|max:255',
-        'eventDescription' => 'required|string',
-        'eventImage' => 'required|image|max:2048',
-    ]);
 
-    // Save the image
-    $imagePath = $request->file('eventImage')->store('public/events');
-    $imageUrl = str_replace('public/', '/storage/', $imagePath);
-
-    // Save the event to the database
-    Event::create([
-        'name' => $validated['eventName'],
-        'description' => $validated['eventDescription'],
-        'image' => $imageUrl,
-    ]);
-    Route::post('/admin_dashboard', [EventController::class, 'store'])->name('admin_dashboard.store');
-
-    return redirect('/admin_dashboard')->with('success', 'Event created successfully!');
-})->name('create-event');
-
-
-Route::post('/update-event', function (Request $request) {
-    $event = Event::findOrFail($request->id);
-    $event->update($request->only(['title', 'description', 'image']));
-    return response()->json(['success' => true]);
-});
-Route::delete('/delete-event', function (Request $request) {
-    Event::destroy($request->id);
-    return response()->json(['success' => true]);
-});
 
 
 // Route to show the participant registration form (GET request)

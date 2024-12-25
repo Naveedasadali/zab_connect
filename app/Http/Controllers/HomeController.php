@@ -17,18 +17,5 @@ class HomeController extends Controller
         // Return the view and pass the events to it
         return view('zabconnect', compact('events'));
     }
-    public function searchEvents(Request $request)
-    {
-        $query = $request->input('query');
-
-        // Fetch events that match the query
-        $events = Event::where('title', 'LIKE', '%' . $query . '%')
-                       ->orWhere('description', 'LIKE', '%' . $query . '%')
-                       ->get();
-    dd($events);
-        // Return the filtered events as JSON
-        return response()->json([
-            'events' => $events
-        ]);
-    }
+   
 }
