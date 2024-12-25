@@ -110,7 +110,8 @@ The project includes migrations for the following models:
 
 ![admin dashbaord](https://github.com/user-attachments/assets/b96f0727-c90d-4bd3-ac0a-bf805e1dfe4c)
 ![login](https://github.com/user-attachments/assets/c1695966-cb69-489b-aa85-94f9c758cc05)
-![events](https://github.com/user-attachments/assets/4e023ce4-a2a5-43ba-a647-83aef08f263f)
+![registration form](https://github.com/user-attachments/assets/fa7cd4ac-70d9-40f9-bd10-5008476d787f)
+
 
 
 
