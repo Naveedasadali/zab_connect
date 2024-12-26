@@ -32,10 +32,7 @@
                         <h5 class="card-title">{{ $event->name }}</h5>  <!-- Display the event name -->
                         <p class="card-text">
                             {{ $event->description }}  <!-- Display the event description -->
-                            <br> 🗓️ : {{ $event->event_date }}  <!-- Display the event date -->
-                            <br> ⏰ : {{ $event->event_time }}  <!-- Display the event time -->
-                            <br> 📍 : {{ $event->location }}  <!-- Display the event location -->
-                            <br> 🎟️ : Students: {{ $event->student_price }} || Alumni: {{ $event->alumni_price }}  <!-- Display the prices -->
+                             <!-- Display the prices -->
                         </p>
                     </div>
                 </div>
